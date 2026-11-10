@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reseller Profit Calculator – Vinted, eBay, Depop, Poshmark Fees | NeatgridDigital</title>
+<meta name="description" content="Free reseller profit calculator. Type what you paid and what it sold for, and compare your real profit after fees on Vinted, eBay, Depop, Poshmark, Mercari, Whatnot and Vestiaire Collective.">
+<link rel="canonical" href="https://neatgriddigital.github.io/reseller-profit-calculator/">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top"><div class="in"><a class="brand" href="../"><span class="mark"><i></i><i class="s"></i><i class="k"></i><i class="s"></i><i></i><i class="s"></i><i></i><i class="s"></i><i></i></span><em style="font-style:normal"><b>Neatgrid</b><span>Digital</span></em></a><nav><a href="../">Free tools</a></nav></div></header>
+<main>
+<h1>Reseller profit calculator</h1>
+<p class="lead">What you paid, what it sold for, and what you really keep after the platform's fees. Compare Vinted, eBay, Depop, Poshmark, Mercari and more side by side.</p>
+<div class="grid">
+<form class="card" onsubmit="return false">
+<label for="plat">Where did it sell?</label>
+<select id="plat"></select>
+<div class="row2">
+<div><label for="price">Sold for</label><input id="price" type="number" inputmode="decimal" step="0.01" min="0" value="35"></div>
+<div><label for="ship">Shipping the buyer paid <span class="hint">to you</span></label><input id="ship" type="number" inputmode="decimal" step="0.01" min="0" value="0"></div>
+</div>
+<div class="row2">
+<div><label for="cost">You paid for it</label><input id="cost" type="number" inputmode="decimal" step="0.01" min="0" value="8"></div>
+<div><label for="post">Postage you paid</label><input id="post" type="number" inputmode="decimal" step="0.01" min="0" value="0"></div>
+</div>
+<label for="other">Other costs <span class="hint">packaging, cleaning, bumps</span></label><input id="other" type="number" inputmode="decimal" step="0.01" min="0" value="1">
+<label for="cur">Show amounts in</label>
+<select id="cur"><option value="€">€ Euro</option><option value="£">£ Pound</option><option value="$">$ Dollar</option></select>
+</form>
+<section class="card" aria-live="polite">
+<div style="color:var(--muted);font-size:14px">You keep from this sale</div>
+<div class="big" id="profit">–</div>
+<div class="kpis">
+<div class="kpi"><div class="l">Platform fees</div><div class="v" id="fees">–</div></div>
+<div class="kpi"><div class="l">Profit margin</div><div class="v" id="margin">–</div></div>
+<div class="kpi"><div class="l">Return on what you paid</div><div class="v" id="roi">–</div></div>
+<div class="kpi"><div class="l">Break-even price</div><div class="v" id="be">–</div></div>
+</div>
+<table class="break" id="break"></table>
+<h2 style="font-size:18px;margin:22px 0 6px">Same sale on every platform</h2>
+<table class="break" id="cmp"></table>
+<p class="note">Fees as of October 2026 for private sellers. Platforms change fees, and some charge extra for promotions or business accounts. Check the platform's fee page.</p>
+<div class="cta">
+<p><b>Track every item and every platform all year.</b> My Reseller Profit Tracker fills in the fees for you, shows profit by platform and category, flags slow stock, and counts how close you are to the 30 sales / €2,000 reporting limit on each platform. Google Sheets and Excel, light and dark.</p>
+<a class="btn" href="https://www.etsy.com/listing/4608134931?utm_source=neatgrid-free-tools&amp;utm_medium=referral&amp;utm_campaign=reseller-profit-calculator">See the tracker on Etsy</a>
+</div>
+</section>
+</div>
+<div class="faq">
+<h2>Reseller fees in short</h2>
+<h3>Vinted</h3><p>Sellers pay no selling fee. The buyer pays a buyer protection fee. Optional bumps and spotlights cost extra.</p>
+<h3>eBay</h3><p>Private sellers in the UK pay no final value fee in most categories; EU countries vary. In the US, most categories cost about 13.6% of the total including shipping, plus $0.40 per order ($0.30 for orders of $10 or less).</p>
+<h3>Depop</h3><p>No selling fee in the UK and US, but a payment processing fee: 2.9% + £0.30 in the UK, 3.3% + $0.45 in the US, on the price plus shipping.</p>
+<h3>Poshmark and Mercari</h3><p>Poshmark takes a flat $2.95 on sales under $15 and 20% on sales of $15 or more. Mercari takes 10% of the item price plus shipping.</p>
+<h3>Do I have to report my sales?</h3><p>In the EU and UK, platforms report sellers with 30 or more sales or €2,000 (about £1,700) or more in a year to the tax office. In the US, platforms send a 1099-K above $20,000 and 200 sales. Selling your own used things at a loss is usually not taxable, but buying to resell is a business. Not tax advice.</p>
+</div>
+</main>
+<footer>Made by NeatgridDigital. Not affiliated with Vinted, eBay, Depop, Poshmark, Mercari, Whatnot or Vestiaire Collective. Not tax or financial advice.</footer>
+<script src="calc.js"></script>
+</body>
+</html>
