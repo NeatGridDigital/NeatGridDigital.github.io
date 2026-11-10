@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gig Driver Profit Calculator – Real Hourly Pay After Fuel and Costs | NeatgridDigital</title>
+<meta name="description" content="Free calculator for delivery and rideshare drivers. Enter your earnings, hours, distance and fuel to see your real profit per hour and cost per mile or km.">
+<link rel="canonical" href="https://neatgriddigital.github.io/gig-driver-profit-calculator/">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top"><div class="in"><a class="brand" href="../"><span class="mark"><i></i><i class="s"></i><i class="k"></i><i class="s"></i><i></i><i class="s"></i><i></i><i class="s"></i><i></i></span><em style="font-style:normal"><b>Neatgrid</b><span>Digital</span></em></a><nav><a href="../">Free tools</a></nav></div></header>
+<main>
+<h1>Gig driver profit per hour</h1>
+<p class="lead">Delivery or rideshare: your app shows what you earned, not what you kept. Add fuel and car costs and see your real hourly pay.</p>
+<div class="grid">
+<form class="card" onsubmit="return false">
+<label for="sys">Units</label>
+<select id="sys"><option value="us">US: miles, mpg, $ per gallon</option><option value="uk">UK: miles, mpg, £ per litre</option><option value="eu">Metric: km, L/100 km, € per litre</option></select>
+<div class="row2">
+<div><label for="earn">Earnings incl. tips</label><input id="earn" type="number" inputmode="decimal" step="1" min="0" value="900"></div>
+<div><label for="hrs">Hours worked</label><input id="hrs" type="number" inputmode="decimal" step="0.5" min="0" value="40"></div>
+</div>
+<div class="row2">
+<div><label for="dist"><span id="distl">Miles driven</span></label><input id="dist" type="number" inputmode="decimal" step="1" min="0" value="600"></div>
+<div><label for="eff"><span id="effl">Fuel economy (mpg)</span></label><input id="eff" type="number" inputmode="decimal" step="0.1" min="0" value="30"></div>
+</div>
+<div class="row2">
+<div><label for="fuel"><span id="fuell">Fuel price per gallon</span></label><input id="fuel" type="number" inputmode="decimal" step="0.01" min="0" value="3.20"></div>
+<div><label for="wear"><span id="wearl">Wear and repairs per mile</span> <span class="hint">tyres, oil, service</span></label><input id="wear" type="number" inputmode="decimal" step="0.01" min="0" value="0.10"></div>
+</div>
+<label for="fixed">Other costs for this period <span class="hint">insurance, phone, parking</span></label><input id="fixed" type="number" inputmode="decimal" step="1" min="0" value="60">
+</form>
+<section class="card" aria-live="polite">
+<div style="color:var(--muted);font-size:14px">Your real pay per hour</div>
+<div class="big" id="ph">–</div>
+<div class="kpis">
+<div class="kpi"><div class="l">Profit</div><div class="v" id="prof">–</div></div>
+<div class="kpi"><div class="l">App says per hour</div><div class="v" id="gph">–</div></div>
+<div class="kpi"><div class="l" id="cpl">Cost per mile</div><div class="v" id="cpm">–</div></div>
+<div class="kpi"><div class="l" id="epl">Earned per mile</div><div class="v" id="epm">–</div></div>
+</div>
+<table class="break" id="break"></table>
+<p class="note">An estimate for planning. Tax rules for mileage differ by country: in the US and UK you can often claim a standard mileage rate instead of real costs. Not tax advice.</p>
+<div class="cta">
+<p><b>Know your real pay every week.</b> My Gig Driver Profit &amp; Mileage Tracker logs each shift on every app, your miles and costs, and shows profit per hour, per app and per month. Google Sheets and Excel, light and dark.</p>
+<a class="btn" href="https://www.etsy.com/listing/4605401159?utm_source=neatgrid-free-tools&amp;utm_medium=referral&amp;utm_campaign=gig-driver-profit-calculator">See it on Etsy</a>
+</div>
+</section>
+</div>
+<div class="faq">
+<h2>Why your real hourly pay is lower</h2>
+<h3>Fuel</h3><p>Every mile or kilometre costs fuel. A car doing 30 mpg at $3.20 a gallon spends about 11 cents a mile.</p>
+<h3>Wear and repairs</h3><p>Tyres, oil, brakes and services add up with distance. Many drivers put aside 8-15 cents a mile (or a few cents per km).</p>
+<h3>Fixed costs</h3><p>Insurance, phone plan, parking and car washes are paid whether you drive or not. Split them over the hours you work.</p>
+<h3>Waiting time counts</h3><p>Count every hour you are logged in and waiting, not just the hours with a passenger or an order.</p>
+</div>
+</main>
+<footer>Made by NeatgridDigital. Not tax or financial advice.</footer>
+<script>
+const $=i=>document.getElementById(i),n=i=>{const v=parseFloat($(i).value);return isFinite(v)&&v>0?v:0};
+const U={us:{d:'Miles driven',e:'Fuel economy (mpg)',f:'Fuel price per gallon',w:'Wear and repairs per mile',u:'mile',c:'$'},uk:{d:'Miles driven',e:'Fuel economy (mpg)',f:'Fuel price per litre',w:'Wear and repairs per mile',u:'mile',c:'£'},eu:{d:'Kilometres driven',e:'Fuel use (L/100 km)',f:'Fuel price per litre',w:'Wear and repairs per km',u:'km',c:'€'}};
+const DEF={us:[600,30,3.20,0.10],uk:[600,45,1.40,0.08],eu:[960,6.5,1.70,0.05]};
+(()=>{const l=(navigator.language||'').toLowerCase();if(l==='en-gb')$('sys').value='uk';else if(/^(de|fr|it|es|nl|el|pt|fi|en-ie|pl|sv|da)/.test(l))$('sys').value='eu';setDefaults();})();
+function setDefaults(){const d=DEF[$('sys').value];['dist','eff','fuel','wear'].forEach((k,i)=>$(k).value=d[i]);}
+function m(v){const c=U[$('sys').value].c;return (v<0?'−':'')+c+Math.abs(v).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}
+function run(){const s=$('sys').value,u=U[s];$('distl').textContent=u.d;$('effl').textContent=u.e;$('fuell').textContent=u.f;$('wearl').textContent=u.w;$('cpl').textContent='Cost per '+u.u;$('epl').textContent='Earned per '+u.u;
+const earn=n('earn'),hrs=n('hrs'),dist=n('dist'),eff=n('eff'),fp=n('fuel');
+let fuel=0;if(eff>0){fuel=s==='us'?dist/eff*fp:s==='uk'?dist/eff*4.54609*fp:dist/100*eff*fp;}
+const wear=dist*n('wear'),fixed=n('fixed'),cost=fuel+wear+fixed,prof=earn-cost;
+$('ph').textContent=hrs?m(prof/hrs):'–';$('ph').className='big '+(prof>=0?'good':'bad');$('prof').textContent=m(prof);$('gph').textContent=hrs?m(earn/hrs):'–';
+$('cpm').textContent=dist?m(cost/dist):'–';$('epm').textContent=dist?m(earn/dist):'–';
+const t=$('break');t.innerHTML='';const a=(x,y,c)=>{const r=t.insertRow();if(c)r.className=c;r.insertCell().textContent=x;r.insertCell().textContent=y};
+a('Earnings incl. tips',m(earn));a('Fuel','−'+m(fuel));a('Wear and repairs','−'+m(wear));a('Other costs','−'+m(fixed));a('Profit',m(prof),'tot');}
+$('sys').addEventListener('change',()=>{setDefaults();run()});
+document.querySelectorAll('input').forEach(e=>e.addEventListener('input',run));run();
+</script>
+</body>
+</html>

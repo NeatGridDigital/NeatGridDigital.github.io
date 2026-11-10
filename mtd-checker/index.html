@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Making Tax Digital Checker – Do I Need MTD for Income Tax? Start Date and Deadlines | NeatgridDigital</title>
+<meta name="description" content="Free Making Tax Digital for Income Tax checker for UK sole traders and landlords. Enter your qualifying income and see when MTD starts for you, plus every quarterly update deadline.">
+<link rel="canonical" href="https://neatgriddigital.github.io/mtd-checker/">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top"><div class="in"><a class="brand" href="../"><span class="mark"><i></i><i class="s"></i><i class="k"></i><i class="s"></i><i></i><i class="s"></i><i></i><i class="s"></i><i></i></span><em style="font-style:normal"><b>Neatgrid</b><span>Digital</span></em></a><nav><a href="../">Free tools</a></nav></div></header>
+<main>
+<h1>Do I need Making Tax Digital?</h1>
+<p class="lead">For UK sole traders and landlords. Type your self-employment and property income (before expenses) and see when MTD for Income Tax starts for you, and your quarterly deadlines.</p>
+<div class="grid">
+<form class="card" onsubmit="return false">
+<p class="hint" style="margin:0 0 6px">Qualifying income = self-employment turnover + property income, <b>before</b> expenses. Wages and pensions don't count.</p>
+<label for="y1">2024/25 tax year <span class="hint">6 Apr 2024 - 5 Apr 2025</span></label><input id="y1" type="number" inputmode="decimal" step="100" min="0" value="38000">
+<label for="y2">2025/26 tax year <span class="hint">estimate if not filed yet</span></label><input id="y2" type="number" inputmode="decimal" step="100" min="0" value="41000">
+<label for="y3">2026/27 tax year <span class="hint">estimate</span></label><input id="y3" type="number" inputmode="decimal" step="100" min="0" value="43000">
+</form>
+<section class="card" aria-live="polite">
+<div style="color:var(--muted);font-size:14px">MTD for Income Tax starts for you on</div>
+<div class="big" id="start">–</div>
+<p id="why" style="margin:0 0 12px"></p>
+<div class="kpis">
+<div class="kpi"><div class="l">Next deadline</div><div class="v" id="next">–</div></div>
+<div class="kpi"><div class="l">Days left</div><div class="v" id="days">–</div></div>
+</div>
+<table class="break" id="dl"></table>
+<p class="note">Based on the gov.uk rules as of November 2026: over £50,000 from 6 April 2026, over £30,000 from 6 April 2027, over £20,000 from 6 April 2028. Some people are exempt or can apply to be. Not tax advice: check gov.uk or ask an accountant.</p>
+<div class="cta">
+<p><b>Get your records ready for MTD.</b> My Making Tax Digital Spreadsheet and App keeps your income and expenses in the right categories, adds up each quarterly update for you, estimates your tax and counts down every deadline. Works for sole traders and landlords.</p>
+<a class="btn" href="https://www.etsy.com/listing/4610687770?utm_source=neatgrid-free-tools&amp;utm_medium=referral&amp;utm_campaign=mtd-checker">See it on Etsy</a>
+</div>
+</section>
+</div>
+<div class="faq">
+<h2>Making Tax Digital in short</h2>
+<h3>What changes?</h3><p>Instead of one tax return a year, you keep digital records and send a short summary to HMRC every quarter through software, then a final return after the year.</p>
+<h3>Who has to join?</h3><p>Sole traders and landlords whose qualifying income is over the limit: over £50,000 from April 2026, over £30,000 from April 2027, over £20,000 from April 2028. HMRC looks at the tax return from two years before.</p>
+<h3>Quarterly deadlines</h3><p>Updates are due 7 August, 7 November, 7 February and 7 May. The final return and payment are due 31 January after the tax year.</p>
+<h3>Can I use a spreadsheet?</h3><p>Yes, you can keep your records in a spreadsheet and send them with bridging software.</p>
+</div>
+</main>
+<footer>Made by NeatgridDigital. Not made, sponsored or endorsed by HMRC. Not tax advice.</footer>
+<script>
+const $=i=>document.getElementById(i),n=i=>{const v=parseFloat($(i).value);return isFinite(v)&&v>0?v:0};
+const D=s=>new Date(s+'T12:00:00');
+function fmt(d){return d.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}
+function run(){const y1=n('y1'),y2=n('y2'),y3=n('y3');let start=null,why='';
+if(y1>50000){start=2026;why='Your 2024/25 income is over £50,000.'}else if(y2>30000){start=2027;why='Your 2025/26 income is over £30,000.'}else if(y3>20000){start=2028;why='Your 2026/27 income is over £20,000.'}
+$('start').textContent=start?'6 April '+start:'Not yet';$('start').className='big '+(start?'good':'');
+$('why').textContent=start?why+' Your first quarterly update is due 7 August '+start+'.':'Your income is under every limit so far. Check again each year, and keep good records anyway.';
+const t=$('dl');t.innerHTML='';const a=(x,y,c)=>{const r=t.insertRow();if(c)r.className=c;r.insertCell().textContent=x;r.insertCell().textContent=y};
+if(!start){$('next').textContent='–';$('days').textContent='–';return;}
+const ty=start+'/'+String((start+1)%100).padStart(2,'0');
+const rows=[['Q1 update (6 Apr - 5 Jul)',D(start+'-08-07')],['Q2 update (to 5 Oct)',D(start+'-11-07')],['Q3 update (to 5 Jan)',D((start+1)+'-02-07')],['Q4 update (to 5 Apr)',D((start+1)+'-05-07')],['Final return and tax payment',D((start+2)+'-01-31')]];
+a('Your first MTD tax year',ty,'tot');rows.forEach(([x,d])=>a(x,fmt(d)));
+const now=new Date();const all=[];for(let y=start;y<start+3;y++){['-08-07','-11-07'].forEach(s=>all.push(D(y+s)));['-02-07','-05-07'].forEach(s=>all.push(D((y+1)+s)));}
+const nx=all.filter(d=>d>now).sort((p,q)=>p-q)[0];$('next').textContent=nx?nx.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}):'–';$('days').textContent=nx?Math.ceil((nx-now)/864e5):'–';}
+document.querySelectorAll('input').forEach(e=>e.addEventListener('input',run));run();
+</script>
+</body>
+</html>

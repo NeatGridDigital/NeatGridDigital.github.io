@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wedding Budget Calculator – Split Your Wedding Budget by Category | NeatgridDigital</title>
+<meta name="description" content="Free wedding budget calculator. Enter your total budget and guest count to see a typical split for venue, food, photos, dress, flowers, music and more, and your cost per guest. Edit every percentage.">
+<link rel="canonical" href="https://neatgriddigital.github.io/wedding-budget-calculator/">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top"><div class="in"><a class="brand" href="../"><span class="mark"><i></i><i class="s"></i><i class="k"></i><i class="s"></i><i></i><i class="s"></i><i></i><i class="s"></i><i></i></span><em style="font-style:normal"><b>Neatgrid</b><span>Digital</span></em></a><nav><a href="../">Free tools</a></nav></div></header>
+<main>
+<h1>Wedding budget calculator</h1>
+<p class="lead">Type your total budget and guest count. See a typical split by category and what each guest costs. Change any percentage to fit your wedding.</p>
+<div class="grid">
+<form class="card" onsubmit="return false">
+<label for="cur">Currency</label>
+<select id="cur"><option value="$">$ Dollar</option><option value="£">£ Pound</option><option value="€">€ Euro</option><option value="C$">C$ Canadian dollar</option><option value="A$">A$ Australian dollar</option></select>
+<div class="row2">
+<div><label for="tot">Total budget</label><input id="tot" type="number" inputmode="decimal" step="100" min="0" value="20000"></div>
+<div><label for="g">Guests</label><input id="g" type="number" inputmode="numeric" step="1" min="1" value="80"></div>
+</div>
+<label style="margin-top:18px">Split <span class="hint">percent of the budget, edit freely</span></label>
+<div id="cats"></div>
+</form>
+<section class="card" aria-live="polite">
+<div style="color:var(--muted);font-size:14px">Cost per guest</div>
+<div class="big good" id="pg">–</div>
+<div class="kpis">
+<div class="kpi"><div class="l">Planned</div><div class="v" id="plan">–</div></div>
+<div class="kpi"><div class="l" id="leftl">Left to plan</div><div class="v" id="left">–</div></div>
+</div>
+<table class="break" id="break"></table>
+<p class="note">The split is a common starting point from wedding planning guides, not a rule. Venue and food usually grow with the guest list.</p>
+<div class="cta">
+<p><b>Plan the whole wedding in one app.</b> My Wedding Planner App and Spreadsheet keeps your budget, guest list and RSVPs, seating plan, checklist and vendors together, on your phone and computer.</p>
+<a class="btn" href="https://www.etsy.com/listing/4609540410?utm_source=neatgrid-free-tools&amp;utm_medium=referral&amp;utm_campaign=wedding-budget-calculator">See it on Etsy</a>
+</div>
+</section>
+</div>
+<div class="faq">
+<h2>How to split a wedding budget</h2>
+<h3>Start with the guest list</h3><p>Venue and food are the biggest costs and grow with every guest. Ten fewer guests often saves more than any other cut.</p>
+<h3>Keep a buffer</h3><p>Small extras add up: tips, alterations, postage, last-minute decor. Keep 5-10% aside.</p>
+<h3>Decide your top three</h3><p>Pick the three things that matter most to you both, spend more there, and save on the rest.</p>
+</div>
+</main>
+<footer>Made by NeatgridDigital. Not tax or financial advice.</footer>
+<script>
+const $=i=>document.getElementById(i),n=i=>{const v=parseFloat($(i).value);return isFinite(v)&&v>0?v:0};
+const C=[['Venue and food',45],['Photos and video',12],['Attire, hair and makeup',9],['Flowers and decor',8],['Music and entertainment',7],['Rings',3],['Cake',2],['Invitations and stationery',2],['Transport',2],['Favours and gifts',3],['Buffer for extras',7]];
+const box=$('cats');C.forEach(([nm,p],i)=>{const d=document.createElement('div');d.className='row2';d.style.alignItems='center';d.style.marginTop='6px';const l=document.createElement('span');l.textContent=nm;l.style.fontSize='15px';const inp=document.createElement('input');inp.type='number';inp.min='0';inp.max='100';inp.step='1';inp.value=p;inp.id='c'+i;inp.setAttribute('aria-label',nm+' percent');d.appendChild(l);d.appendChild(inp);box.appendChild(d)});
+(()=>{const l=(navigator.language||'').toLowerCase();$('cur').value=l==='en-gb'?'£':l==='en-ca'?'C$':l==='en-au'?'A$':/^(de|fr|it|es|nl|el|pt|fi|en-ie)/.test(l)?'€':'$'})();
+function m(v){return (v<0?'−':'')+$('cur').value+Math.round(Math.abs(v)).toLocaleString()}
+function run(){const tot=n('tot'),g=Math.max(1,Math.round(n('g'))||1);let sum=0;const t=$('break');t.innerHTML='';const a=(x,y,c)=>{const r=t.insertRow();if(c)r.className=c;r.insertCell().textContent=x;r.insertCell().textContent=y};
+C.forEach(([nm],i)=>{const p=n('c'+i);sum+=p;a(nm+' ('+p+'%)',m(tot*p/100))});
+a('Total ('+sum+'%)',m(tot*sum/100),'tot');$('pg').textContent=m(tot*Math.min(sum,100)/100/g);$('plan').textContent=sum+'%';
+$('leftl').textContent=sum>100?'Over budget':'Left to plan';$('left').textContent=m(Math.abs(tot*(100-sum)/100));$('left').style.color=sum>100?'var(--bad)':'';}
+document.querySelectorAll('input,select').forEach(e=>e.addEventListener('input',run));run();
+</script>
+</body>
+</html>
