@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cake Pricing Calculator – How Much to Charge for a Cake | NeatgridDigital</title>
+<meta name="description" content="Free cake pricing calculator for home bakers. Add ingredients, packaging, your time and overheads to find the right price for any cake, cupcakes or bakes, with the profit you make.">
+<link rel="canonical" href="https://neatgriddigital.github.io/cake-price-calculator/">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top"><div class="in"><a class="brand" href="../"><span class="mark"><i></i><i class="s"></i><i class="k"></i><i class="s"></i><i></i><i class="s"></i><i></i><i class="s"></i><i></i></span><em style="font-style:normal"><b>Neatgrid</b><span>Digital</span></em></a><nav><a href="../">Free tools</a></nav></div></header>
+<main>
+<h1>Cake pricing calculator</h1>
+<p class="lead">Most home bakers forget their time and their electricity. Add everything below and see what your cake should really cost.</p>
+<div class="grid">
+<form class="card" onsubmit="return false">
+<label for="cur">Currency</label>
+<select id="cur"><option value="$">$ Dollar</option><option value="£">£ Pound</option><option value="€">€ Euro</option><option value="C$">C$ Canadian dollar</option><option value="A$">A$ Australian dollar</option></select>
+<label for="ing">Ingredients for this order</label><input id="ing" type="number" inputmode="decimal" step="0.01" min="0" value="14">
+<label for="pack">Box, board and decorations</label><input id="pack" type="number" inputmode="decimal" step="0.01" min="0" value="4">
+<div class="row2">
+<div><label for="hrs">Your hours <span class="hint">bake, decorate, clean</span></label><input id="hrs" type="number" inputmode="decimal" step="0.25" min="0" value="4"></div>
+<div><label for="rate">Pay per hour</label><input id="rate" type="number" inputmode="decimal" step="0.5" min="0" value="15"></div>
+</div>
+<label for="ovh">Overheads % <span class="hint">power, gas, tools, wear. 10-15% is common</span></label><input id="ovh" type="number" inputmode="decimal" step="1" min="0" value="10">
+<label for="mar">Profit on top % <span class="hint">what the business keeps</span></label><input id="mar" type="number" inputmode="decimal" step="1" min="0" max="90" value="25">
+<label for="srv">Servings or pieces</label><input id="srv" type="number" inputmode="numeric" step="1" min="1" value="20">
+</form>
+<section class="card" aria-live="polite">
+<div style="color:var(--muted);font-size:14px">Charge at least</div>
+<div class="big good" id="price">–</div>
+<div class="kpis">
+<div class="kpi"><div class="l">Per serving</div><div class="v" id="per">–</div></div>
+<div class="kpi"><div class="l">Your real cost</div><div class="v" id="cost">–</div></div>
+<div class="kpi"><div class="l">You earn per hour</div><div class="v" id="hour">–</div></div>
+<div class="kpi"><div class="l">Business profit</div><div class="v" id="prof">–</div></div>
+</div>
+<table class="break" id="break"></table>
+<p class="note">A starting point, not a rule: check what bakers near you charge too. If you sell through a platform, add its fees.</p>
+<div class="cta">
+<p><b>Price every cake from your real recipes.</b> My Home Bakery Pricing &amp; Profit Tracker works out each recipe's cost from your ingredient prices, keeps your orders and shows your profit by month. Comes with a phone app, plus Google Sheets and Excel.</p>
+<a class="btn" href="https://www.etsy.com/listing/4608190476?utm_source=neatgrid-free-tools&amp;utm_medium=referral&amp;utm_campaign=cake-price-calculator">See the tracker on Etsy</a>
+</div>
+</section>
+</div>
+<div class="faq">
+<h2>How to price a cake</h2>
+<h3>1. Ingredients and packaging</h3><p>Add up what this one order uses: flour, butter, eggs, chocolate, fondant, plus the box, board and toppers.</p>
+<h3>2. Pay yourself for your time</h3><p>Count baking, decorating, shopping and cleaning. Pick an hourly pay you would accept from a job.</p>
+<h3>3. Add overheads</h3><p>Your oven, mixer and electricity wear out and cost money. 10-15% on top of ingredients and time covers most kitchens.</p>
+<h3>4. Add profit</h3><p>Profit is what the business keeps after paying you: for new tins, a slow month or growth.</p>
+<h3>Price per serving</h3><p>Divide the price by the number of servings to compare with other bakers and to quote cupcakes or slices.</p>
+</div>
+</main>
+<footer>Made by NeatgridDigital. Not tax or financial advice.</footer>
+<script>
+const $=i=>document.getElementById(i),n=i=>{const v=parseFloat($(i).value);return isFinite(v)&&v>0?v:0};
+function m(v){const c=$('cur').value;return (v<0?'−':'')+c+Math.abs(v).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}
+(()=>{const l=(navigator.language||'').toLowerCase();$('cur').value=l==='en-gb'?'£':l==='en-ca'?'C$':l==='en-au'?'A$':/^(de|fr|it|es|nl|el|pt|fi|en-ie)/.test(l)?'€':'$'})();
+function run(){const ing=n('ing'),pack=n('pack'),lab=n('hrs')*n('rate'),ovh=(ing+pack+lab)*n('ovh')/100,cost=ing+pack+lab+ovh,mar=Math.min(90,n('mar'))/100,price=mar<1?cost/(1-mar):cost,prof=price-cost,srv=Math.max(1,Math.round(n('srv'))||1),hrs=n('hrs');
+$('price').textContent=m(price);$('per').textContent=m(price/srv);$('cost').textContent=m(cost);$('hour').textContent=hrs?m((lab+prof)/hrs):'–';$('prof').textContent=m(prof);
+const t=$('break');t.innerHTML='';const a=(x,y,c)=>{const r=t.insertRow();if(c)r.className=c;r.insertCell().textContent=x;r.insertCell().textContent=y};
+a('Ingredients',m(ing));a('Packaging and decorations',m(pack));a('Your time ('+hrs+' h)',m(lab));a('Overheads ('+n('ovh')+'%)',m(ovh));a('Profit ('+Math.round(mar*100)+'% of price)',m(prof));a('Price',m(price),'tot')}
+document.querySelectorAll('input,select').forEach(e=>e.addEventListener('input',run));run();
+</script>
+</body>
+</html>

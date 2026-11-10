@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Etsy Fee Calculator 2026 – See Your Real Profit per Sale | NeatgridDigital</title>
+<meta name="description" content="Free Etsy fee calculator for 2026. Enter your price, shipping and costs to see every Etsy fee (listing, transaction, payment processing, regulatory, Offsite Ads, VAT) and your real profit. US, UK, Canada, Australia and EU.">
+<link rel="canonical" href="https://neatgriddigital.github.io/etsy-fee-calculator/">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What fees does Etsy charge per sale?","acceptedAnswer":{"@type":"Answer","text":"A listing fee per item sold, a 6.5% transaction fee on the item price plus shipping, a payment processing fee (for example 3% + $0.25 in the US, 4% + €0.30 in most EU countries), a regulatory operating fee in some countries, and a 15% Offsite Ads fee only on sales that came from an Etsy ad outside Etsy. Sellers in the UK, EU, Canada, Australia and New Zealand also pay VAT or GST on these fees unless they have a VAT number."}},
+{"@type":"Question","name":"How much does Etsy take from a $20 sale?","acceptedAnswer":{"@type":"Answer","text":"For a US seller selling a $20 item with free shipping, Etsy fees are about $2.35: $0.20 listing, $1.30 transaction and $0.85 payment processing. That is roughly 12% of the sale."}},
+{"@type":"Question","name":"Do digital downloads pay the same Etsy fees?","acceptedAnswer":{"@type":"Answer","text":"Yes. Digital downloads pay the same listing, transaction and payment processing fees. They just have no shipping or postage costs."}}]}</script>
+</head>
+<body>
+<header class="top"><div class="in"><a class="brand" href="../"><span class="mark"><i></i><i class="s"></i><i class="k"></i><i class="s"></i><i></i><i class="s"></i><i></i><i class="s"></i><i></i></span><em style="font-style:normal"><b>Neatgrid</b><span>Digital</span></em></a><nav><a href="../">Free tools</a></nav></div></header>
+<main>
+<h1>Etsy fee calculator (2026)</h1>
+<p class="lead">Type your price and costs. See every Etsy fee and what you really keep from one sale. Works for the US, UK, Canada, Australia, New Zealand and the EU.</p>
+<div class="grid">
+<form class="card" id="f" onsubmit="return false">
+<label for="country">Your shop's country</label>
+<select id="country"></select>
+<div class="row2">
+<div><label for="price">Item price <span class="hint">each</span></label><input id="price" type="number" inputmode="decimal" step="0.01" min="0" value="20"></div>
+<div><label for="qty">Quantity</label><input id="qty" type="number" inputmode="numeric" step="1" min="1" value="1"></div>
+</div>
+<div class="row2">
+<div><label for="ship">Shipping you charge</label><input id="ship" type="number" inputmode="decimal" step="0.01" min="0" value="0"></div>
+<div><label for="disc">Discount % <span class="hint">sale or coupon</span></label><input id="disc" type="number" inputmode="decimal" step="1" min="0" max="100" value="0"></div>
+</div>
+<div class="row2">
+<div><label for="cost">Cost per item <span class="hint">materials</span></label><input id="cost" type="number" inputmode="decimal" step="0.01" min="0" value="4"></div>
+<div><label for="post">Postage you pay</label><input id="post" type="number" inputmode="decimal" step="0.01" min="0" value="0"></div>
+</div>
+<label class="check"><input id="offsite" type="checkbox"> This sale came from an Offsite Ad</label>
+<label class="check" id="vatwrap"><input id="vatno" type="checkbox"> I have a VAT number</label>
+<label class="check" id="intlwrap"><input id="intl" type="checkbox"> Buyer is in another country</label>
+<label for="target" style="margin-top:18px">Profit margin you want <span class="hint">to find the right price</span></label>
+<input id="target" type="number" inputmode="decimal" step="1" min="0" max="80" value="40">
+</form>
+<section class="card" aria-live="polite">
+<div class="l" style="color:var(--muted);font-size:14px">You keep from this sale</div>
+<div class="big" id="profit">–</div>
+<div class="kpis">
+<div class="kpi"><div class="l">Etsy fees</div><div class="v" id="fees">–</div></div>
+<div class="kpi"><div class="l">Profit margin</div><div class="v" id="margin">–</div></div>
+<div class="kpi"><div class="l">Fees as % of sale</div><div class="v" id="feepct">–</div></div>
+<div class="kpi"><div class="l">Price for your margin</div><div class="v" id="tprice">–</div></div>
+</div>
+<table class="break" id="break"></table>
+<p class="note">Rates as of October 2026. This is an estimate: Etsy may round differently, and your currency conversion (2.5% if you list in a different currency than your bank) is not included. Check Etsy's fee page for your shop.</p>
+<div class="cta">
+<p><b>Want this for every order, all year?</b> My Etsy Seller Profit Tracker does these sums for each order, adds your expenses, and shows profit by month and by product. Google Sheets and Excel, light and dark.</p>
+<a class="btn" href="https://www.etsy.com/listing/4603566267?utm_source=neatgrid-free-tools&amp;utm_medium=referral&amp;utm_campaign=etsy-fee-calculator">See the tracker on Etsy</a>
+</div>
+</section>
+</div>
+<div class="faq">
+<h2>How Etsy fees work</h2>
+<h3>Listing fee</h3><p>About $0.20 (or the same in your currency) for each item sold. Each sale renews the listing, so the fee is charged again per unit.</p>
+<h3>Transaction fee: 6.5%</h3><p>Charged on the item price plus the shipping you charge, after any discount.</p>
+<h3>Payment processing fee</h3><p>A percentage plus a small fixed amount per order. For example 3% + $0.25 in the US, 4% + £0.20 in the UK, 4% + €0.30 in most EU countries.</p>
+<h3>Regulatory operating fee</h3><p>An extra percentage in a few countries, such as the UK, France, Italy, Spain, Hungary and Canada.</p>
+<h3>Offsite Ads fee</h3><p>15% of the order, only when the buyer came from an Etsy ad on another website. It drops to 12% once your shop has made $10,000 in a year, and it is capped per order.</p>
+<h3>VAT or GST on fees</h3><p>Sellers in the UK, EU, Canada, Australia and New Zealand pay VAT or GST on top of Etsy's fees, unless they gave Etsy a VAT number. In Ireland it is always charged.</p>
+<h3>Do digital downloads pay the same fees?</h3><p>Yes, the same listing, transaction and processing fees, just without postage.</p>
+</div>
+</main>
+<footer>Etsy is a trademark of Etsy, Inc. This tool is made by NeatgridDigital and is not made, sponsored or endorsed by Etsy. Not tax or financial advice.</footer>
+<script src="fees.js"></script>
+</body>
+</html>

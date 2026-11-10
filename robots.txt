@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://neatgriddigital.github.io/sitemap.xml

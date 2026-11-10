@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Self-Employed Tax Set-Aside Calculator – How Much to Save for Tax | NeatgridDigital</title>
+<meta name="description" content="Free calculator for freelancers and the self-employed: see how much of each payment to put aside for tax, per month and per quarter, from your income, expenses and the set-aside rate you choose.">
+<link rel="canonical" href="https://neatgriddigital.github.io/tax-set-aside-calculator/">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top"><div class="in"><a class="brand" href="../"><span class="mark"><i></i><i class="s"></i><i class="k"></i><i class="s"></i><i></i><i class="s"></i><i></i><i class="s"></i><i></i></span><em style="font-style:normal"><b>Neatgrid</b><span>Digital</span></em></a><nav><a href="../">Free tools</a></nav></div></header>
+<main>
+<h1>How much should I set aside for tax?</h1>
+<p class="lead">For freelancers and the self-employed. Type a typical month and the rate you want to save. See what to move to your tax pot from every payment.</p>
+<div class="grid">
+<form class="card" onsubmit="return false">
+<label for="cur">Currency</label>
+<select id="cur"><option value="$">$ Dollar</option><option value="£">£ Pound</option><option value="€">€ Euro</option><option value="C$">C$ Canadian dollar</option><option value="A$">A$ Australian dollar</option></select>
+<label for="inc">Income in a typical month</label><input id="inc" type="number" inputmode="decimal" step="10" min="0" value="4000">
+<label for="exp">Business expenses in a typical month</label><input id="exp" type="number" inputmode="decimal" step="10" min="0" value="600">
+<label for="rate">Set-aside rate % <span class="hint">many freelancers save 25-30% of profit; your accountant can give your number</span></label><input id="rate" type="number" inputmode="decimal" step="1" min="0" max="70" value="25">
+<label for="pay">A payment you just received <span class="hint">optional</span></label><input id="pay" type="number" inputmode="decimal" step="10" min="0" value="1200">
+</form>
+<section class="card" aria-live="polite">
+<div style="color:var(--muted);font-size:14px">Put aside each month</div>
+<div class="big good" id="month">–</div>
+<div class="kpis">
+<div class="kpi"><div class="l">Each quarter</div><div class="v" id="q">–</div></div>
+<div class="kpi"><div class="l">For the whole year</div><div class="v" id="y">–</div></div>
+<div class="kpi"><div class="l">From the payment above</div><div class="v" id="p">–</div></div>
+<div class="kpi"><div class="l">Safe to spend each month</div><div class="v" id="safe">–</div></div>
+</div>
+<table class="break" id="break"></table>
+<p class="note">This is a savings guide, not a tax calculation and not tax advice. Real tax depends on your country, allowances and other income. Ask an accountant for your rate.</p>
+<div class="cta">
+<p><b>Track it all year without thinking.</b> My Freelancer Income &amp; Expense Tracker logs every payment and expense, works out your tax set-aside for each quarter and shows your real profit. Google Sheets and Excel, light and dark.</p>
+<a class="btn" href="https://www.etsy.com/listing/4593977157?utm_source=neatgrid-free-tools&amp;utm_medium=referral&amp;utm_campaign=tax-set-aside-calculator">See the tracker on Etsy</a>
+</div>
+</section>
+</div>
+<div class="faq">
+<h2>Saving for tax when you're self-employed</h2>
+<h3>Why save from every payment?</h3><p>No employer takes tax out for you. Moving a fixed share of each payment to a separate account means the bill is never a surprise.</p>
+<h3>Save from profit, not income</h3><p>Tax is usually charged on profit: income minus allowable business expenses. Keep receipts so your expenses count.</p>
+<h3>What rate should I use?</h3><p>Many freelancers start at 25-30% of profit and adjust after their first tax bill. Higher earners often need more.</p>
+<h3>Quarterly payments</h3><p>In some countries (for example US estimated tax, UK payments on account) you pay during the year. A quarterly figure helps you plan for those.</p>
+</div>
+</main>
+<footer>Made by NeatgridDigital. Not tax or financial advice.</footer>
+<script>
+const $=i=>document.getElementById(i),n=i=>{const v=parseFloat($(i).value);return isFinite(v)&&v>0?v:0};
+function m(v){const c=$('cur').value;return (v<0?'−':'')+c+Math.abs(v).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}
+(()=>{const l=(navigator.language||'').toLowerCase();$('cur').value=l==='en-gb'?'£':l==='en-ca'?'C$':l==='en-au'?'A$':/^(de|fr|it|es|nl|el|pt|fi|en-ie)/.test(l)?'€':'$'})();
+function run(){const inc=n('inc'),exp=n('exp'),r=Math.min(70,n('rate'))/100,prof=Math.max(0,inc-exp),mo=prof*r,share=inc>0?prof/inc*r:0;
+$('month').textContent=m(mo);$('q').textContent=m(mo*3);$('y').textContent=m(mo*12);$('p').textContent=n('pay')?m(n('pay')*share):'–';$('safe').textContent=m(inc-exp-mo);
+const t=$('break');t.innerHTML='';const a=(x,y,c)=>{const w=t.insertRow();if(c)w.className=c;w.insertCell().textContent=x;w.insertCell().textContent=y};
+a('Income',m(inc));a('Expenses','−'+m(exp));a('Profit',m(prof));a('Set aside ('+Math.round(r*100)+'% of profit)','−'+m(mo));a('Left to spend',m(inc-exp-mo),'tot');
+}
+document.querySelectorAll('input,select').forEach(e=>e.addEventListener('input',run));run();
+</script>
+</body>
+</html>
